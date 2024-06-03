@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <audio controls autoplay hid    loop>
+        <source src="./sound.mp3" type="audio/mpeg">Browsermu Tidak Mendukung Tag Audio
+    </audio>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+    /* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+:root {
+  --white-color: #fff;
+  --blue-color: #4070f4;
+  --grey-color: #707070;
+  --grey-color-light: #aaa;
+}
+body {
+  background-color: #e7f2fd;
+  transition: all 0.5s ease;
+}
+body.dark {
+  background-color: #333;
+}
+body.dark {
+  --white-color: #333;
+  --blue-color: #fff;
+  --grey-color: #f2f2f2;
+  --grey-color-light: #aaa;
+}
+
+/* navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  background-color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  z-index: 1000;
+  box-shadow: 0 0 2px var(--grey-color-light);
+}
+.logo_item {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--blue-color);
+}
+.navbar img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.search_bar {
+  height: 47px;
+  max-width: 430px;
+  width: 100%;
+}
+.search_bar input {
+  height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  font-size: 18px;
+  outline: none;
+  background-color: var(--white-color);
+  color: var(--grey-color);
+  border: 1px solid var(--grey-color-light);
+  padding: 0 20px;
+}
+.navbar_content {
+  display: flex;
+  align-items: center;
+  column-gap: 25px;
+}
+.navbar_content i {
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--grey-color);
+}
+
+/* sidebar */
+.sidebar {
+  background-color: var(--white-color);
+  width: 260px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 80px 20px;
+  z-index: 100;
+  overflow-y: scroll;
+  box-shadow: 0 0 1px var(--grey-color-light);
+  transition: all 0.5s ease;
+}
+.sidebar.close {
+  padding: 60px 0;
+  width: 80px;
+}
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+.menu_content {
+  position: relative;
+}
+.menu_title {
+  margin: 15px 0;
+  padding: 0 20px;
+  font-size: 18px;
+}
+.sidebar.close .menu_title {
+  padding: 6px 30px;
+}
+.menu_title::before {
+  color: var(--grey-color);
+  white-space: nowrap;
+}
+.menu_dahsboard::before {
+  content: "Dashboard";
+}
+.menu_other::before {
+  content: "Other";
+}
+.menu_setting::before {
+  content: "Contact";
+}
+.sidebar.close .menu_title::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 18px;
+  border-radius: 12px;
+  background: var(--grey-color-light);
+}
+.menu_items {
+  padding: 0;
+  list-style: none;
+}
+.navlink_icon {
+  position: relative;
+  font-size: 22px;
+  min-width: 50px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 6px;
+}
+.navlink_icon::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: calc(100% + 100px);
+  left: -20px;
+}
+.navlink_icon:hover {
+  background: var(--blue-color);
+}
+.sidebar .nav_link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 4px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--grey-color);
+  white-space: nowrap;
+}
+.sidebar.close .navlink {
+  display: none;
+}
+.nav_link:hover {
+  color: var(--white-color);
+  background: var(--blue-color);
+}
+.sidebar.close .nav_link:hover {
+  background: var(--white-color);
+}
+.submenu_item {
+  cursor: pointer;
+}
+.submenu {
+  display: none;
+}
+.submenu_item .arrow-left {
+  position: absolute;
+  right: 10px;
+  display: inline-block;
+  margin-right: auto;
+}
+.sidebar.close .submenu {
+  display: none;
+}
+.show_submenu ~ .submenu {
+  display: block;
+}
+.show_submenu .arrow-left {
+  transform: rotate(90deg);
+}
+.submenu .sublink {
+  padding: 15px 15px 15px 52px;
+}
+.bottom_content {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 260px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.bottom {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 0;
+  justify-content: space-around;
+  padding: 18px 0;
+  text-align: center;
+  width: 100%;
+  color: var(--grey-color);
+  border-top: 1px solid var(--grey-color-light);
+  background-color: var(--white-color);
+}
+.bottom i {
+  font-size: 20px;
+}
+.bottom span {
+  font-size: 18px;
+}
+.sidebar.close .bottom_content {
+  width: 50px;
+  left: 15px;
+}
+.sidebar.close .bottom span {
+  display: none;
+}
+.sidebar.hoverable .collapse_sidebar {
+  display: none;
+}
+#sidebarOpen {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  #sidebarOpen {
+    font-size: 25px;
+    display: block;
+    margin-right: 10px;
+    cursor: pointer;
+    color: var(--grey-color);
+  }
+  .sidebar.close {
+    left: -100%;
+  }
+  .search_bar {
+    display: none;
+  }
+  .sidebar.close .bottom_content {
+    left: -100%;
+  }
+}
+/* CSS untuk membuat form Chat GPT menjadi latar belakang dengan opasitas */
+.chatGPTForm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Warna latar belakang dengan opasitas */
+  z-index: 999; /* Pastikan form berada di atas konten lainnya */
+}
+</style>
+    <!-- favicon  -->
+    <link rel="shortcut icon" href="media/thumbnail.ico" type="image/x-icon" />
+    <!-- Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" href="myProjects/webProject/icofont/css">
+    <!-- font awesome css -->
+    <link rel="stylesheet" href="css/plugins/font-awesome.min.css" />
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>Dashboard | Basuki Store</title>
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <div class="logo_item">
+        <i class="fas fa-bars" id="sidebarOpen"></i>
+        <img src="https://telegra.ph/file/c1603a7e2cf99ab1ad084.jpg" alt="." />B'Store
+      </div>
+
+      <div class="search_bar">
+          <i class='fas fa-magnifying-glass'></i>
+        <input type="text" placeholder="Pencarian"/>
+      </div>
+
+      <div class="navbar_content">
+        <i class='fas fa-moon fa-fade' id="darkLight"></i>
+        <i class='fas fa-bell fa-bounce'></i>
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png?q=60" alt="." class="profile" />
+      </div>
+    </nav>
+
+    <!-- sidebar -->
+    <nav class="sidebar">
+      <div class="menu_content">
+        <ul class="menu_items">
+          <div class="menu_title menu_dahsboard"></div>
+          <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+          <!-- start -->
+<li class="item">
+    <a href="chatgpt.html" class="nav_link" onclick="showChatGPT()">
+      <span class="navlink_icon">
+        <i class="fas fa-robot"></i>
+      </span>
+      <span class="navlink">Chat GPT</span>
+    </a>
+  </li>
+  <div class="submenu">
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Video Upload</title>
+      </head>
+      <body>
+        <h1>Upload a Video</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+          <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required />
+          </div>
+          <div>
+            <label for="avatar">Avatar URL:</label>
+            <input type="text" id="avatar" name="avatar" required />
+          </div>
+          <div>
+            <label for="video">Video:</label>
+            <input
+              type="file"
+              id="video"
+              name="video"
+              accept="video/mp4"
+              required
+            />
+          </div>
+          <button type="submit">Upload</button>
+        </form>
+
+        <script>
+          document
+            .getElementById("uploadForm")
+            .addEventListener("submit", async function (event) {
+              event.preventDefault();
+
+              const formData = new FormData();
+              formData.append(
+                "username",
+                document.getElementById("username").value
+              );
+              formData.append("title", document.getElementById("title").value);
+              formData.append("avatar", document.getElementById("avatar").value);
+              formData.append("video", document.getElementById("video").files[0]);
+
+              try {
+                const response = await fetch(
+                  "https://db-tiktok.vercel.app/api/upload",
+                  {
+                    method: "POST",
+                    body: formData,
+                  }
+                );
+
+                const result = await response.json();
+                if (result.success) {
+                  alert("Video uploaded successfully!");
+                } else {
+                  alert("Error uploading video");
+                }
+              } catch (error) {
+                console.error("Error:", error);
+                alert("Error uploading video");
+              }
+            });
+        </script>
+      </body>
+    </html>
+  </div>
+</li>
+          <!-- End -->
+
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="fas fa-layer-group"></i>
+              </span>
+              <span class="navlink">Product</span>
+              <i class="fas fa-chevron-right arrow-left"></i>
+            </div>
+
+            <ul class="menu_items submenu">
+              <a href="https://tiktok.com/@basukistore" class="nav_link sublink"><i class="fab fa-diaspora"></i> TopUp</a>
+              <a href="https://tiktok.com/@basukistore" class="nav_link sublink"><i class="fab fa-diaspora"></i> Item</a>
+              <a href="https://tiktok.com/@basukistore" class="nav_link sublink"><i class="fab fa-diaspora"></i> Akun</a>
+              <a href="https://tiktok.com/@basukistore" class="nav_link sublink"><i class="fab fa-diaspora"></i> Voucher</a>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="menu_items">
+          <div class="menu_title menu_other"></div>
+          <li class="item">
+            <a href="https://tiktok.com/@basukistore" class="nav_link">
+              <span class="navlink_icon">
+                <i class="fas fa-globe"></i>
+              </span>
+              <span class="navlink">Login Panel</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="https://tiktok.com/@basukistore" class="nav_link">
+              <span class="navlink_icon">
+                <i class="fas fa-user-xmark"></i>
+              </span>
+              <span class="navlink">Text Banned</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="https://tiktok.com/@basukistore" class="nav_link">
+              <span class="navlink_icon">
+                <i class="fas fa-user-check"></i>
+              </span>
+              <span class="navlink">Text UnBanned</span>
+            </a>
+          </li>
+          <!-- start -->
+          <li class="item">
+            <div href="#" class="nav_link submenu_item">
+              <span class="navlink_icon">
+                <i class="fas fa-layer-group"></i>
+              </span>
+              <span class="navlink">Lainnya</span>
+              <i class="fas fa-chevron-right arrow-left"></i>
+            </div>
+
+            <ul class="menu_items submenu">
+              <a href="https://tiktok.com/@basukistore" class="nav_link sublink"><i class="fab fa-diaspora"></i> Hosting</a>
+              <a href="https://tiktok.com/@basukistore" class="nav_link sublink"><i class="fab fa-diaspora"></i> Domain</a>
+              <a href="https://tiktok.com/@basukistore" class="nav_link sublink"><i class="fab fa-diaspora"></i> Cpanel</a>
+              <a href="https://tiktok.com/@basukistore" class="nav_link sublink"><i class="fab fa-diaspora"></i> VPS</a>
+              <a href="https://tiktok.com/@basukistore" class="nav_link sublink"><i class="fab fa-diaspora"></i> WHM</a>
+            </ul>
+          </li>
+          <!-- end -->
+        </ul>
+        <ul class="menu_items">
+          <div class="menu_title menu_setting"></div>
+          <li class="item">
+            <a href="https://wa.me/6283167665895" class="nav_link">
+              <span class="navlink_icon">
+                <i class="fab fa-whatsapp"></i>
+              </span>
+              <span class="navlink">WhatsApp</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="https://www.facebook.com/septiono.mahlendra.1" class="nav_link">
+              <span class="navlink_icon">
+                <i class="fab fa-facebook"></i>
+              </span>
+              <span class="navlink">Facebook</span>
+            </a>
+          </li>
+          <li class="item">
+            <a href="https://t.me/@BasukiStore" class="nav_link">
+              <span class="navlink_icon">
+                <i class="fab fa-telegram"></i>
+              </span>
+              <span class="navlink">Telegram</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Sidebar Open / Close -->
+        <div class="bottom_content">
+          <div class="bottom expand_sidebar">
+            <a href="https://05624fc6-8871-4fd0-92ba-8e5071bb73fc-00-2r45s9w46wkou.pike.replit.dev">
+            <span class="navlink">Login</span>
+            <span class="navlink_icon"><i class='fas fa-arrow-right-to-bracket'></i></span>
+            </a>
+          </div>
+          <a href="https://05624fc6-8871-4fd0-92ba-8e5071bb73fc-00-2r45s9w46wkou.pike.replit.dev">
+          <div class="bottom collapse_sidebar">
+            <span class="navlink">Logout</span>
+            <span class="navlink_icon"><i class='fas fa-arrow-right-from-bracket'></i></span>
+          </div>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- main js -->
+    <script>
+    const body = document.querySelector("body");
+const darkLight = document.querySelector("#darkLight");
+const sidebar = document.querySelector(".sidebar");
+const submenuItems = document.querySelectorAll(".submenu_item");
+const sidebarOpen = document.querySelector("#sidebarOpen");
+const sidebarClose = document.querySelector(".collapse_sidebar");
+const sidebarExpand = document.querySelector(".expand_sidebar");
+sidebarOpen.addEventListener("click", () => sidebar.classList.toggle("close"));
+
+sidebarClose.addEventListener("click", () => {
+  sidebar.classList.add("close", "hoverable");
+});
+sidebarExpand.addEventListener("click", () => {
+  sidebar.classList.remove("close", "hoverable");
+});
+
+sidebar.addEventListener("mouseenter", () => {
+  if (sidebar.classList.contains("hoverable")) {
+    sidebar.classList.remove("close");
+  }
+});
+sidebar.addEventListener("mouseleave", () => {
+  if (sidebar.classList.contains("hoverable")) {
+    sidebar.classList.add("close");
+  }
+});
+
+darkLight.addEventListener("click", () => {
+  body.classList.toggle("dark");
+  if (body.classList.contains("dark")) {
+    document.setI;
+    darkLight.classList.replace("bx-sun", "bx-moon");
+  } else {
+    darkLight.classList.replace("bx-moon", "bx-sun");
+  }
+});
+
+submenuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    item.classList.toggle("show_submenu");
+    submenuItems.forEach((item2, index2) => {
+      if (index !== index2) {
+        item2.classList.remove("show_submenu");
+      }
+    });
+  });
+});
+
+if (window.innerWidth < 768) {
+  sidebar.classList.add("close");
+} else {
+  sidebar.classList.remove("close");
+}
+// JavaScript untuk menampilkan form Chat GPT sebagai latar belakang saat diklik
+function showChatGPT() {
+  var chatGPTForm = document.getElementById("chatGPTForm");
+  chatGPTForm.style.display = "block";
+}
+</script>
+  </body>
+</html>

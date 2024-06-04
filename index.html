@@ -267,11 +267,7 @@ body.dark {
   .sidebar.close .bottom_content {
     left: -100%;
   }
-}
-/* CSS untuk membuat form Chat GPT menjadi latar belakang dengan opasitas */
-.chatGPTForm {
-  display: none;
-}
+  }
 </style>
     <!-- favicon  -->
     <link rel="shortcut icon" href="media/thumbnail.ico" type="image/x-icon" />
@@ -566,12 +562,6 @@ if (window.innerWidth < 768) {
 } else {
   sidebar.classList.remove("close");
 }
-// JavaScript untuk menampilkan form Chat GPT sebagai latar belakang saat diklik
-function showChatGPT() {
-  var chatGPTForm = document.getElementById("chatGPTForm");
-  chatGPTForm.style.display = "block";
-  chatGPTForm.style.zIndex = "1001"; // Atur z-index agar lebih tinggi dari sidebar
-                     }
 </script>
   </body>
 </html>
